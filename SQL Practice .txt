@@ -1,0 +1,102 @@
+10.39 truncate
+11:48 DDL Done
+
+		  	      SQL Commands
+--------------------------------------------------------------------------
+  |		 |	 	 |	 	 | 	 	|
+ DDL		DML		TCL		DQL		DCL
+
+-create	      -insert	      -commit		-select     	-grant		
+-alter	      -update	      -rollback				-revoke
+-drop	      -delete	      -savepoint
+-truncate     -lock	
+	      -call
+	      -explain plan
+---------------------------------------------------------------------------------
+====== DDL(Data Defination Language) : 
+	it deals with the structure of the database object.
+
+*** CREATE :
+
+	use to create database or its objects(like tables, views, index, 	functions, triggers, store procedure)
+
+create table Employee555 
+(
+	empId number(10),
+	empName varchar(30),
+	empSal float(5)
+);
+----------------------------------------------------------------------------------
+
+*** DROP :
+
+	use to delete the whole database or a table.
+
+drop table Employee;
+
+----------------------------------------------------------------------------------
+*** TRUNCATE :
+
+	use to delete all records from table, but structure remain in the database
+	it is a quick operation.(than drop where even table structure is deleted)
+
+TRUNCATE TABLE Employee555;
+----------------------------------------------------------------------------------
+*** ALTER : 
+		use to add, drop, modify column of already existing table.
+		It is also used to add and drop various constraints on the 		existing table.
+ADD
+	use to add/drop column to already existing table.
+
+
+ALTER TABLE Employee add mobNo number(10);
+alter table Employee555 add(email varchar2(20), dept varchar2(30));
+
+
+Delete
+	use to delete column from already existing table.
+
+ALTER TABLE Employee drop column mobno;
+
+ALTER TABLE employee DROP (email, dept);
+
+Modify
+	use to modify column of already existing table.
+
+ALTER TABLE employee modify empsal number(8);
+
+ALTER TABLE employee modify (empsal float(6), empname varchar2(35));
+
+Rename
+
+	use to rename the table or column.
+ALTER TABLE employee555 rename to employee55;
+ALTER TABLE employee55 rename column empid to id;
+----------------------------------------------------------------------------------
+*** comment :
+
+	As is any programming languages comments matter a lot in SQL also
+	use to write comments in any SQL snippet.
+	Comments can be written in the following three formats:
+
+Single line comments.
+Multi line comments
+In line comments
+
+e.g
+-- single line comment
+-- another comment
+SELECT * FROM employee555; 
+
+
+/* SELECT * FROM Employee555;
+SELECT * FROM dept;
+SELECT * FROM Employee666; */
+SELECT * FROM employee;
+===================================================================================
+====== 
+	DML(Data Manipulation Language) : 
+
+		includes commands that deals with manipulation of already existing 
+	data in databse.
+		this commands include most of the sql statements.
