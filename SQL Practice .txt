@@ -1,5 +1,6 @@
 10.39 truncate
 11:48 DDL Done
+what exactly is transaction?
 
 		  	      SQL Commands
 --------------------------------------------------------------------------
@@ -20,9 +21,9 @@
 
 	use to create database or its objects(like tables, views, index, 	functions, triggers, store procedure)
 
-create table Employee555 
+create table Employee99
 (
-	empId number(10),
+	empId number(20),
 	empName varchar(30),
 	empSal float(5)
 );
@@ -53,7 +54,7 @@ ALTER TABLE Employee add mobNo number(10);
 alter table Employee555 add(email varchar2(20), dept varchar2(30));
 
 
-Delete
+Drop
 	use to delete column from already existing table.
 
 ALTER TABLE Employee drop column mobno;
@@ -61,11 +62,13 @@ ALTER TABLE Employee drop column mobno;
 ALTER TABLE employee DROP (email, dept);
 
 Modify
-	use to modify column of already existing table.
+	use to modify column(size, datatype etc) of already existing table.
 
 ALTER TABLE employee modify empsal number(8);
 
 ALTER TABLE employee modify (empsal float(6), empname varchar2(35));
+
+NOTE: can modify(increase) the size of column even if it is empty or already has 	data in it. but to Deacrease the size of column column should be empty.
 
 Rename
 
@@ -75,7 +78,7 @@ ALTER TABLE employee55 rename column empid to id;
 ----------------------------------------------------------------------------------
 *** comment :
 
-	As is any programming languages comments matter a lot in SQL also
+	As in any programming languages comments matter a lot in SQL also
 	use to write comments in any SQL snippet.
 	Comments can be written in the following three formats:
 
@@ -94,9 +97,138 @@ SELECT * FROM dept;
 SELECT * FROM Employee666; */
 SELECT * FROM employee;
 ===================================================================================
-====== 
+====== 11.24
 	DML(Data Manipulation Language) : 
 
 		includes commands that deals with manipulation of already existing 
 	data in databse.
 		this commands include most of the sql statements.
+
+1] insert into using Only values:
+
+ INSERT INTO Employee values(101, 'abc', 100000);
+
+... insreting multiple rows 
+
+INSERT INTO employee9 ( empid, empname, empsal )VALUES(123, 'Ofce', 22),(23,'Llos', 2212);
+
+
+2] insert into table by specifying column names( in other column null will be inserted otherwise default value if it has default contraint)
+
+ INSERT INTO Employee9 values
+(102, 'xyz', 99)
+(102, 'xyz', 88);
+
+insert all
+  into employee9 (empid, empname, empsal) values (129, 'khaj', 19000)
+  into employee9 (empid, empname, empsal) values (130, 'ravi', 20000)
+select * from dual;
+
+
+3]using slect statement:
+	select rows from other tale and insert into existing table
+	- datatype and size of column should be same.
+	- 
+INSERT INTO employee555 select * from employee55;
+
+4] insert specific columns
+
+insert into employee99(empid, empname, empsal) select empid, empname, empsal from employee9;
+
+5]insert specific rows from other table
+
+insert into empolyee select * from employee where id = 101;
+insert into employee99(empid, empname) select empid,empname from employee9 where empid = 1;
+
+6] accept value from user:
+insert into employee99 values(&empid, &empname, &empsal);
+
+
+----------------------------------------------------------------------------------
+*** delete :
+
+1]delete one or multiple rows depending on condition 
+
+	delete from employee9 where empid=1;
+
+2]delete all rows in table
+
+	delete from employee9;
+
+NOTE :  DELETE is a DML (Data Manipulation Language) command hence operation performed by 	     	DELETE can be rolled back or undone.
+3] delete the column data in table
+ update employee99 set empid = null;
+
+----------------------------------------------------------------------------------
+*** Update :
+
+1]
+update employee9 set empname = 'john' where empid = 2;
+
+2]
+update employee9 set empid = 5, empname = 'ram' where empid = 3;
+
+3]all empid column will set to 100
+
+ update employee99 set empid = 100;
+
+4] delete the column data in table
+// update employee99 set empid = null;	//null is not a value, its purpose is to show that column/field contains nothing
+
+5] update employee99 set empid = 2, empname = 'sham' where empname = 'hhh' and empsal=88 ; 
+
+6] query inside query:
+ update employee99 set id=(select empid from employee9 where empname='dsd' and empsal=77) where name='ds';
+-------------------------------------------------------------------------------------------
+
+Difference between drop, delete, truncate:
+
+(DDL) drop: deletes entire table structure along with data.
+(DML) delete: use to delete one or more tuples of table.
+	changes done are not auto commit. Thus can be rollback.
+(ddl) truncate: deletes all the tuples of table.
+	cannot be rollback/undo
+	faster than dml(delete)
+
+-------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+====== TCL(Transaction Control Language) : 
+
+	use to control the transactions.
+*** commit :
+
+	-use to save the transaction 
+	-once commit is used transaction cannot be undone.
+
+	commit;
+-------------------------------------------------------------------------------------------
+rollback :
+	-use to reverse the transaction done from last commit or rollback or till the savepoint.
+
+	rollback;
+-------------------------------------------------------------------------------------------
+
+savepoint : 
+	-use to create points within transactions to which to rollback.
+create savepoint:
+
+	savepoint firstsavepoint;
+rollback to savepoint:
+
+	rollback to firstsavepoint;
+release savepoint:
+	release savepoint firstsavepoint;
+===================================================================================================DQL(Data Query Language) :
+	 DQL statements are used for performing queries on the data within schema objects. 
+
+	-Select is the most commonly used statement in SQL. 
+	-The SELECT Statement in SQL is	used to retrieve or fetch data from a database.
+	-The data returned is stored in a result table. 
+	-This result table is also called result-set.
+
+select entire tale:
+	select * from employee99;
+select all row with particular column;
+	select id, name from employee99;
+
+	select id, name from employee99 where id = 1;
