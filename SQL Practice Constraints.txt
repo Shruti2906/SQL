@@ -1,0 +1,43 @@
+Constraints :
+	     -Constraints are the rules/restrictions that we can apply on the type of data in a table. 
+
+-------------------------------------------------------------------------------------------
+How to specify constraints?
+ 
+1.Create table We can specify constraints at the time of creating the table using CREATE 		TABLE statement.
+
+2. alter table :  We can also specify the constraints after creating a table using ALTER 		TABLE statement. 
+-------------------------------------------------------------------------------------------
+NOTE : constraints cannot be modified.
+-------------------------------------------------------------------------------------------
+NOT NULL : This constraint ensures that a null value cannot be inserted in a column.
+
+create table Employee 
+(
+	EmpId number(5) Constraint emp_Empid_notnull NOT NULL,
+	EmpName varchar2(30)
+);
+
+alter table Employee modify empname not null;
+
+
+ insert into Employee values(1, ' ');
+//insert into Employee values(1, null)	//Not Valid
+-------------------------------------------------------------------------------------------
+
+UNIQUE : 
+	This constraint when specified with a column, tells that all the values in the column 	must be unique. That is, the values in any row of a column must not be repeated.
+ 
+create table Employee1 
+(
+	EmpId number(5) Constraint emp_Empid_uk UNIQUE,
+	EmpName varchar2(30)
+); 
+
+alter table employee modify empid constraint emp_empid_uk UNIQUE;
+alter table employee1 drop constraint EMP_EMPID_UK;
+
+insert into employee1 values(1, 'asas');
+insert into employee values(2, ' ');    //space is valid only once
+insert into employee values(3, '');	//null value is valid 
+-------------------------------------------------------------------------------------------

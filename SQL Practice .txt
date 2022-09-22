@@ -113,7 +113,7 @@ SELECT * FROM employee;
 INSERT INTO employee9 ( empid, empname, empsal )VALUES(123, 'Ofce', 22),(23,'Llos', 2212);
 
 
-2] insert into table by specifying column names( in other column null will be inserted otherwise default value if it has default contraint)
+2] insert into table by specifying column names( in other column null will be inserted otherwise default value if it has default constraint)
 
  INSERT INTO Employee9 values
 (102, 'xyz', 99)
@@ -125,7 +125,7 @@ insert all
 select * from dual;
 
 
-3]using slect statement:
+3]using select statement:
 	select rows from other tale and insert into existing table
 	- datatype and size of column should be same.
 	- 
@@ -232,3 +232,6 @@ select all row with particular column;
 	select id, name from employee99;
 
 	select id, name from employee99 where id = 1;
+
+
+=========================================================================================
