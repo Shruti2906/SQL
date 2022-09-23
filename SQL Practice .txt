@@ -75,6 +75,8 @@ Rename
 	use to rename the table or column.
 ALTER TABLE employee555 rename to employee55;
 ALTER TABLE employee55 rename column empid to id;
+
+NOTE: column must be empty to change the data type using alter 
 ----------------------------------------------------------------------------------
 *** comment :
 
