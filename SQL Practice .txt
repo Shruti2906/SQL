@@ -19,7 +19,7 @@ what exactly is transaction?
 
 *** CREATE :
 
-	use to create database or its objects(like tables, views, index, 	functions, triggers, store procedure)
+	use to create database or its objects(like tables, views, index, functions, triggers, store procedure)
 
 create table Employee99
 (
@@ -45,7 +45,7 @@ TRUNCATE TABLE Employee555;
 ----------------------------------------------------------------------------------
 *** ALTER : 
 		use to add, drop, modify column of already existing table.
-		It is also used to add and drop various constraints on the 		existing table.
+		It is also used to add and drop various constraints on the existing table.
 ADD
 	use to add/drop column to already existing table.
 
@@ -68,7 +68,7 @@ ALTER TABLE employee modify empsal number(8);
 
 ALTER TABLE employee modify (empsal float(6), empname varchar2(35));
 
-NOTE: can modify(increase) the size of column even if it is empty or already has 	data in it. but to Deacrease the size of column column should be empty.
+NOTE: can modify(increase) the size of column even if it is empty or already has data in it. but to Deacrease the size of column column should be empty.
 
 Rename
 
@@ -157,7 +157,7 @@ insert into employee99 values(&empid, &empname, &empsal);
 
 	delete from employee9;
 
-NOTE :  DELETE is a DML (Data Manipulation Language) command hence operation performed by 	     	DELETE can be rolled back or undone.
+NOTE :  DELETE is a DML (Data Manipulation Language) command hence operation performed by DELETE can be rolled back or undone.
 3] delete the column data in table
  update employee99 set empid = null;
 
@@ -220,7 +220,9 @@ rollback to savepoint:
 	rollback to firstsavepoint;
 release savepoint:
 	release savepoint firstsavepoint;
-===================================================================================================DQL(Data Query Language) :
+===================================================================================================
+
+DQL(Data Query Language) :
 	 DQL statements are used for performing queries on the data within schema objects. 
 
 	-Select is the most commonly used statement in SQL. 
