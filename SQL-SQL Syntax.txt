@@ -1,0 +1,10 @@
+SQL
+
+
+SQL Syntax : 
+
+	-each sql query starts with sql keyword(select, create, delete etc) and ends with semicolon(;).
+	-sql is case-insensitive language (table name Student and StudeNt are same, select and SELECT are same.)
+
+	
+
