@@ -1,0 +1,121 @@
+
+What is an Operator in SQL?
+
+	An operator is a reserved word or a character used primarily in an SQL statement's WHERE clause to perform operation(s), such as comparisons and arithmetic operations. 
+	These Operators are used to specify conditions in an SQL statement and to serve as conjunctions for multiple conditions in a statement.
+
+- Arithmetic operators
+- Comparison operators
+- Logical operators
+- Operators used to negate conditions	
+
+------------------------------------------------------------------------------------------------------------------------
+
+1] Arithmetic operators :
+
+	UPDATE emp set empsalary = empsalary+100 where empsalary = 1000;
+------------------------------------------------------------------------------------------------------------------------
+
+2] Relational/Comparison operators :
+	select * from emp where empsalary>2000;
+------------------------------------------------------------------------------------------------------------------------
+
+3] Concatenation operators (||) : 
+	update emp set empname=empname ||' xyz' where empsalary = 2000;
+------------------------------------------------------------------------------------------------------------------------
+
+4] Logical operators :
+select * from emp where empsalary = 2000 AND empid = 2;
+select * from emp where empsalary = 2000 OR empid = 3;
+select * from emp where NOT empsalary = 2000;
+------------------------------------------------------------------------------------------------------------------------
+
+5] Another Relational Operator / Logical Operators :
+
+IN:
+ select * from emp where empid IN(1, 3, 5);
+NOT IN:
+ select * from emp where empid NOT IN(1, 3, 5);
+BETWEEN:
+ select * from emp where empid BETWEEN 3 and 5; 
+LIKE:
+ can be used only for string type columns(values).
+ select * from emp where empname LIKE 'a%';//% for zero or more than 1 values(multiple).
+ select * from emp where empname LIKE '_y%';//_ for single value, '__' for 2 values ..etc
+ select * from emp where empname NOT LIKE 'w%';
+------------------------------------------------------------------------------------------------------------------------
+
+5] SET OPERATORS : 
+	-Used to perform algebric operation among 2 or more tables.
+
+	5.1] UNION:
+		//both table should contain same no of columns(although using alias it is possible to perform set 				operations even if both tables does not contain same no of columns), data type of all corresponding 				columns	should be same.
+
+		resultant records are sorted in ascending order by first column
+
+		select * from emp UNION select * from emp1;
+
+
+	By default, the UNION operator returns the unique rows from both result sets. If you want to retain the 		duplicate rows, you explicitly use UNION ALL as follows:
+
+	5.2] UNION ALL:
+
+	 NOTE : here duplicate means same/duplicate records/rows in same table.
+
+	select * from emp UNION ALL select * from emp1;
+
+
+	5.3] INTERSECT :
+	select * from emp INTERSECT select * from emp1;
+		
+		only common records.
+
+	5.4] all records of First table will be shown except the records which appear in table 2 as well (2nd table and 			same record in both tables, will be ELIMINATED)
+
+	select * from set1 MINUS select * from set2;
+	
+	  NOTE: MINUS also selects unique records from table. 
+
+------------------------------------------------------------------------------------------------------------------------
+//Raw Data :
+
+create table set1
+(
+	id number(10),
+	name varchar2(30),
+	education varchar2(10),
+	salary float(10)		
+);
+
+create table set2
+(
+	id number(10),
+	name varchar2(30),
+	education varchar2(10),
+	salary float(10)		
+);
+
+insert into set1 values(1, 'aaa', 'bbbb', 100000);
+insert into set1 values(2, 'bbb', 'cccc', 200000);
+insert into set1 values(3, 'ccc', 'dddd', 300000);
+insert into set1 values(3, 'ccc', 'dddd', 300000);
+insert into set1 values(4, 'ddd', 'eeee', 400000);
+insert into set1 values(4, 'eee', 'ffff', 500000);
+insert into set1 values(5, 'ggg', 'hhhh', 600000);
+insert into set1 values(5, 'ggg', 'hhhh', 600000);
+
+insert into set2 values(5, 'ggg', 'hhhh', 600000);
+insert into set2 values(11, 'ssas', 'mkmkm', 980000);
+insert into set2 values(22, 'qwb', 'dsdc', 700000);
+insert into set2 values(33, 'qkjj', 'njnn', 200000);
+insert into set2 values(44, 'abb', 'bncc', 62000);
+insert into set2 values(55, 'uub', 'cqqq', 215000);
+insert into set2 values(66, 'uub', 'cqqq', 215000);
+
+------------------------------------------------------------------------------------------------------------------------
+
+multi row SubQuery : 
+ select job_title from jobs where job_id  IN( (select job_id from job_history where department_id BETWEEN 10 and 50));
+
+single row subquery :
+ select job_title from jobs where job_id = (select job_id from job_history where department_id = 20);
