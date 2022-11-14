@@ -64,9 +64,9 @@ ALTER TABLE employee DROP (email, dept);
 Modify
 	use to modify column(size, datatype etc) of already existing table.
 
-ALTER TABLE employee modify empsal number(8);
+ALTER TABLE employee modify empsal number(8);	
 
-ALTER TABLE employee modify (empsal float(6), empname varchar2(35));
+ALTER TABLE employee modify (empsal float(6), empname varchar2(35));	
 
 NOTE: can modify(increase) the size of column even if it is empty or already has data in it. but to Deacrease the size of column column should be empty.
 
@@ -128,7 +128,7 @@ select * from dual;
 
 
 3]using select statement:
-	select rows from other tale and insert into existing table
+	select rows from other table and insert into existing table
 	- datatype and size of column should be same.
 	- 
 INSERT INTO employee555 select * from employee55;
@@ -230,7 +230,7 @@ DQL(Data Query Language) :
 	-The data returned is stored in a result table. 
 	-This result table is also called result-set.
 
-select entire tale:
+select entire table:
 	select * from employee99;
 select all row with particular column;
 	select id, name from employee99;
