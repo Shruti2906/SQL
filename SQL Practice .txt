@@ -68,7 +68,8 @@ ALTER TABLE employee modify empsal number(8);
 
 ALTER TABLE employee modify (empsal float(6), empname varchar2(35));	
 
-NOTE: can modify(increase) the size of column even if it is empty or already has data in it. but to Deacrease the size of column column should be empty.
+NOTE: can modify(increase) the size of column even if it is empty or already has data in it. but to Decrease the size of column, column should be empty.
+	(column must be empty to decrease precision or scale).
 
 Rename
 
@@ -76,8 +77,13 @@ Rename
 ALTER TABLE employee555 rename to employee55;
 ALTER TABLE employee55 rename column empid to id;
 
-NOTE: column must be empty to change the data type using alter 
-----------------------------------------------------------------------------------
+RENAME empalter to empoo;
+
+NOTE: column must be EMPTY to change the data type using alter,
+	However conversion from (CHAR to VARCHAR), (INT to FLOAT) and vice-versa is possible.
+	
+NOTE: Only one column could be renamed at a time(in one Query).	
+----------------------------------------------------------------------------------------------------
 *** comment :
 
 	As in any programming languages comments matter a lot in SQL also
@@ -98,12 +104,12 @@ SELECT * FROM employee555;
 SELECT * FROM dept;
 SELECT * FROM Employee666; */
 SELECT * FROM employee;
-===================================================================================
+=======================================================================================================
 ====== 11.24
 	DML(Data Manipulation Language) : 
 
 		includes commands that deals with manipulation of already existing 
-	data in databse.
+	data in table.
 		this commands include most of the sql statements.
 
 1] insert into using Only values:
@@ -115,7 +121,7 @@ SELECT * FROM employee;
 INSERT INTO employee9 ( empid, empname, empsal )VALUES(123, 'Ofce', 22),(23,'Llos', 2212);
 
 
-2] insert into table by specifying column names( in other column null will be inserted otherwise default value if it has default constraint)
+2] insert into table by specifying column names( in other column null will be inserted otherwise default value if it has DEFUALT constraint)
 
  INSERT INTO Employee9 values
 (102, 'xyz', 99)
@@ -146,7 +152,7 @@ insert into employee99(empid, empname) select empid,empname from employee9 where
 insert into employee99 values(&empid, &empname, &empsal);
 
 
-----------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 *** delete :
 
 1]delete one or multiple rows depending on condition 
@@ -161,7 +167,7 @@ NOTE :  DELETE is a DML (Data Manipulation Language) command hence operation per
 3] delete the column data in table
  update employee99 set empid = null;
 
-----------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 *** Update :
 
 1]
