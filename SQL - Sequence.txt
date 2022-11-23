@@ -1,0 +1,69 @@
+SEQUENCE :
+	 Sequence is a set of integers 1, 2, 3, … that are generated and supported by some database systems to produce unique values on demand.
+
+CREATE SEQUENCE sequence_name
+START WITH initial_value
+INCREMENT BY increment_value
+MINVALUE minimum value
+MAXVALUE maximum value
+CYCLE|NOCYCLE ;
+
+
+cycle: When sequence reaches its set_limit 
+	it starts from beginning.
+
+nocycle: An exception will be thrown 
+	 if sequence exceeds its max_value.
+
+----Create Sequence
+
+create sequence seq1
+start with 10
+increment by 10
+minvalue 10
+maxvalue 100
+nocycle;
+
+create table demoseq
+(
+	id number(10),
+	id2 number(20)
+);
+
+insert into demoseq values(seq1.nextval, 100);
+insert into demoseq values(seq1.nextval, 100);
+
+sequence query creating sequence in descending order:
+
+CREATE SEQUENCE seq2
+start with 100
+increment by -1
+minvalue 1
+maxvalue 100
+cycle 20;
+
+
+----Alter Sequence
+	alter sequence seq1 maxvalue 200;
+	alter sequence seq1 increment by 100;
+	alter sequence seq1 nocycle;
+
+
+----Drop Sequence
+	 drop sequence seq2;
+
+
+
+FAQ for sequence:
+
+	 While creating a sequence, what does cache and 	nocache options mean? For example, you could 	create a sequence with a cache of 20 Or you could 	create the same sequence with the nocache option?
+
+ANS:-	 With respect to a sequence, the cache option specifies how many sequence values will be stored in memory for faster access.
+
+The downside of creating a sequence with a cache is that if a system failure occurs, all cached sequence values that have not be used, will be "lost". This results in a "gap" in the assigned sequence values. When the system comes back up, Oracle will cache new numbers from where it left off in the sequence, ignoring the so called "lost" sequence values.
+
+TIP: To recover the lost sequence values, you can always 	execute an ALTER SEQUENCE command to reset the 	counter to the correct value.
+
+Nocache means that none of the sequence values are stored in memory. This option may sacrifice some performance, however, you should not encounter a gap in the assigned sequence values.
+
+
