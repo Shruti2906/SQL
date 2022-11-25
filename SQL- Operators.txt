@@ -75,6 +75,16 @@ LIKE:
 	select * from set1 MINUS select * from set2;
 	
 	  NOTE: MINUS also selects unique records from table. 
+------------------------------------------------------------------------------------------------------------------------
+6] Wild Card Operator:
+	SQL LIKE operator, which is used to compare a value to similar values using the wildcard operators.
+
+1. The percent sign (%) : Matches one or more characters.
+2. The underscore (_) : Matches one character.
+
+ select * from demo2 where id LIKE 'A%';
+ select * from demo2 where id LIKE 'A%_';
+ select * from demo2 where id LIKE '_A';
 
 ------------------------------------------------------------------------------------------------------------------------
 //Raw Data :

@@ -265,6 +265,11 @@ DQL(Data Query Language) :
 	select empsalary from emp WHERE id BETWEEN 101 AND 104);	
 	select empsalary from emp WHERE id NOT IN(101, 102, 104);
 
+----Fetch Records from multiple tables
+	SELECT age, new FROM demo1, demo2;
+
 ----using ALIAS
 		select empname "First_Name", empsalary "Salary" from emp WHERE id = 10;
+
+		SELECT d1.Id, d2.NAME FROM demo1 d1, demo2 d2 where d1.id = d2.id;
 ========================================================================================================================

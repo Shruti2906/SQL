@@ -2,10 +2,11 @@ SQL Constraints:
 
 	-Constraints are the rules/restrictions 	 enforced on data columns on a table
 	-This ensures the accuracy and reliability of 		 the data in the database.
-
+-----------------------------------------------------------
 Following are some of the most commonly used constraints available in SQL :
 
 NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK, DEFUALT
+------------------------------------------------------------
 
 NOT NULL : 
 
@@ -106,6 +107,8 @@ create table Demo5
 
 
 NOTE: You CAN insert NULL values into columns with the 	UNIQUE constraint because NULL is the absence of 	a value, so it is never equal to other NULL 	values and not considered a duplicate value.
+
+space(' ') is valid only once.
 ---------------------------------------------------------
 CHECK:
 
@@ -233,6 +236,7 @@ constraint fkk foreign key (demo11id) references demo11(id)
 ---ALter / add
 	 alter table bb add constraint fk_bb_name foreign key(name) references aa(name);
 
+	 alter table demom add constraint FK_demomN_id FOREIGN KEY(id) references demo1(id) ON DELETE SET NULL;
 
 ----ALter disable/enable/drop
 	alter table bb disable constraint fk_bb_name;
@@ -282,8 +286,19 @@ create table b1
 (
 	id number(5),
 	name varchar2(10) ,
-	constraint fk_bb_composite FOREIGN KEY(id,name) references a1(id, name) ON DELETE CASCADE
+	constraint fk_bb_composite FOREIGN KEY(id,name) 	references a1(id, name) ON DELETE CASCADE
 );
 
 
+------------------------------------------------------------
 
+---Enable NOVALIDATE Constraint:
+	ENABLE NOVALIDATE means the constraint is checked for new or modified rows, but existing data may violate the constraint
+
+ alter table demom enable NOVALIDATE constraint CK_demom_id;
+
+ ALTER TABLE tab1 MODIFY CONSTRAINT fk_tab1_tab2 ENABLE VALIDATE;
+
+ alter table demom add constraint FK_demomN_id FOREIGN KEY(id) references demo1(id) ON DELETE SET NULL;
+
+------------------------------------------------------------
