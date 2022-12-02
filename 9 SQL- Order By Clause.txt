@@ -1,0 +1,49 @@
+ORDER BY clause :
+
+	The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+
+The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
+
+
+
+----sort by ascending order
+	select * from demom order by id;
+
+----sort by descending order
+	 select * from demom order by id desc;
+
+----sort by two columns
+	select * from demom order by id, name;
+	
+	if duplicate id found then those records will be 	sorted by name.(both ASC)
+
+----
+	select * from demom order by id DESC,name DESC;
+	select * from demom order by id ASC,name desc;
+ i.e   select * from demom order by id ASC,name desc;
+
+	if duplicate id found then those records will be 		sorted by name in DESC order.(id ASC, name DESC)
+e.g
+select * from demom;
+
+        ID NAME
+---------- -------------------
+        10 abc
+        10 bcd
+        30 cde
+
+SQL> select * from demom order by id,name;
+
+        ID NAME
+---------- -------------------
+        10 abc
+        10 bcd
+        30 cde
+
+SQL> select * from demom order by id,name desc;
+
+        ID NAME
+---------- -------------------
+        10 bcd
+        10 abc
+        30 cde
