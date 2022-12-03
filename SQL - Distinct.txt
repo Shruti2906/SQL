@@ -1,0 +1,7 @@
+
+DISTINCT :
+
+	The SQL DISTINCT keyword is used in conjunction with the SELECT statement to eliminate all the duplicate records and fetching only unique records.
+
+	select distinct id from demom;
+	select distinct id,name from demom;(unique record i.e id and name unique combination)
