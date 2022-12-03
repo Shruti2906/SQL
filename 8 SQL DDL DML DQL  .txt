@@ -1,0 +1,275 @@
+10.39 truncate
+11:48 DDL Done
+what exactly is transaction?
+
+		  	      SQL Commands
+--------------------------------------------------------------------------
+  |		 |	 	 |	 	 | 	 	|
+ DDL		DML		TCL		DQL		DCL
+
+-create	      -insert	      -commit		-select     	-grant		
+-alter	      -update	      -rollback				-revoke
+-drop	      -delete	      -savepoint
+-truncate     -lock	
+	      -call
+	      -explain plan
+---------------------------------------------------------------------------------
+====== DDL(Data Defination Language) : 
+	it deals with the structure of the database object.
+
+*** CREATE :
+
+	use to create database or its objects(like tables, views, index, functions, triggers, store procedure)
+
+create table Employee99
+(
+	empId number(20),
+	empName varchar(30),
+	empSal float(5)
+);
+----------------------------------------------------------------------------------
+
+*** DROP :
+
+	use to delete the whole database or a table.
+
+drop table Employee;
+
+----------------------------------------------------------------------------------
+*** TRUNCATE :
+
+	use to delete all records from table, but structure remain in the database
+	it is a quick operation.(than drop where even table structure is deleted)
+
+TRUNCATE TABLE Employee555;
+----------------------------------------------------------------------------------
+*** ALTER : 
+		use to add, drop, modify column of already existing table.
+		It is also used to add and drop various constraints on the existing table.
+ADD
+	use to add/drop column to already existing table.
+
+
+ALTER TABLE Employee add mobNo number(10);
+alter table Employee555 add(email varchar2(20), dept varchar2(30));
+
+
+Drop
+	use to delete column from already existing table.
+
+ALTER TABLE Employee drop column mobno;
+
+ALTER TABLE employee DROP (email, dept);
+
+Modify
+	use to modify column(size, datatype etc) of already existing table.
+
+ALTER TABLE employee modify empsal number(8);	
+
+ALTER TABLE employee modify (empsal float(6), empname varchar2(35));	
+
+NOTE: can modify(increase) the size of column even if it is empty or already has data in it. but to Decrease the size of column, column should be empty.
+	(column must be empty to decrease precision or scale).
+
+Rename
+
+	use to rename the table or column.
+ALTER TABLE employee555 rename to employee55;
+ALTER TABLE employee55 rename column empid to id;
+
+RENAME empalter to empoo;
+
+NOTE: column must be EMPTY to change the data type using alter,
+	However conversion from (CHAR to VARCHAR), (INT to FLOAT) and vice-versa is possible.
+	
+NOTE: Only one column could be renamed at a time(in one Query).	
+----------------------------------------------------------------------------------------------------
+*** comment :
+
+	As in any programming languages comments matter a lot in SQL also
+	use to write comments in any SQL snippet.
+	Comments can be written in the following three formats:
+
+Single line comments.
+Multi line comments
+In line comments
+
+e.g
+-- single line comment
+-- another comment
+SELECT * FROM employee555; 
+
+
+/* SELECT * FROM Employee555;
+SELECT * FROM dept;
+SELECT * FROM Employee666; */
+SELECT * FROM employee;
+
+========================================================================================================================
+========================================================================================================================
+====== 11.24
+
+	DML(Data Manipulation Language) : 
+
+		includes commands that deals with manipulation of already existing 
+	data in table.
+		this commands include most of the sql statements.
+
+1] insert into using Only values:
+
+ INSERT INTO Employee values(101, 'abc', 100000);
+
+... insreting multiple rows 
+
+INSERT INTO employee9 ( empid, empname, empsal )VALUES(123, 'Ofce', 22),(23,'Llos', 2212);
+
+
+2] insert into table by specifying column names( in other column null will be inserted otherwise default value if it has DEFUALT constraint)
+
+ INSERT INTO Employee9 values
+(102, 'xyz', 99)
+(102, 'xyz', 88);
+
+insert all
+  into employee9 (empid, empname, empsal) values (129, 'khaj', 19000)
+  into employee9 (empid, empname, empsal) values (130, 'ravi', 20000)
+select * from dual;
+
+
+3]using select statement:
+	select rows from other table and insert into existing table
+	- datatype and size of column should be same.
+	- 
+INSERT INTO employee555 select * from employee55;
+
+4] insert specific columns
+
+insert into employee99(empid, empname, empsal) select empid, empname, empsal from employee9;
+
+5]insert specific rows from other table
+
+insert into empolyee select * from employee where id = 101;
+insert into employee99(empid, empname) select empid,empname from employee9 where empid = 1;
+
+6] accept value from user:
+insert into employee99 values(&empid, &empname, &empsal);
+
+
+------------------------------------------------------------------------------------------------
+*** delete :
+
+1]delete one or multiple rows depending on condition 
+
+	delete from employee9 where empid=1;
+
+2]delete all rows in table
+
+	delete from employee9;
+
+NOTE :  DELETE is a DML (Data Manipulation Language) command hence operation performed by DELETE can be rolled back or undone.
+3] delete the column data in table
+ update employee99 set empid = null;
+
+------------------------------------------------------------------------------------------------
+*** Update :
+
+1]
+update employee9 set empname = 'john' where empid = 2;
+
+2]
+update employee9 set empid = 5, empname = 'ram' where empid = 3;
+
+3]all empid column will set to 100
+
+ update employee99 set empid = 100;
+
+4] delete the column data in table
+// update employee99 set empid = null;	//null is not a value, its purpose is to show that column/field contains nothing
+
+5] update employee99 set empid = 2, empname = 'sham' where empname = 'hhh' and empsal=88 ; 
+
+6] query inside query:
+ update employee99 set id=(select empid from employee9 where empname='dsd' and empsal=77) where name='ds';
+-------------------------------------------------------------------------------------------
+
+Difference between drop, delete, truncate:
+
+(DDL) drop: deletes entire table structure along with data.
+(DML) delete: use to delete one or more tuples of table.
+	changes done are not auto commit. Thus can be rollback.
+(ddl) truncate: deletes all the tuples of table.
+	cannot be rollback/undo
+	faster than dml(delete)
+
+
+========================================================================================================================
+========================================================================================================================
+======
+
+ TCL(Transaction Control Language) : 
+
+	use to control the transactions.
+*** commit :
+
+	-use to save the transaction 
+	-once commit is used transaction cannot be undone.
+
+	commit;
+------------------------------------------------------------------------------------------------------------------------
+rollback :
+	-use to reverse the transaction done from last commit or rollback or till the savepoint.
+
+	rollback;
+------------------------------------------------------------------------------------------------------------------------
+
+savepoint : 
+	-use to create points within transactions to which to rollback.
+create savepoint:
+
+	savepoint firstsavepoint;
+rollback to savepoint:
+
+	rollback to firstsavepoint;
+release savepoint:
+	release savepoint firstsavepoint;
+
+==========================================================================================================================
+
+DQL(Data Query Language) :
+	 DQL statements are used for performing queries on the data within schema objects. 
+
+	-Select is the most commonly used statement in SQL. 
+	-The SELECT Statement in SQL is	used to retrieve or fetch data from a database.
+	-The data returned is stored in a result table. 
+	-This result table is also called result-set.
+
+---select entire table records:
+	select * from employee99;
+
+----select PARTICULAR COLUMNS with particular column;
+	select id, name from employee99;
+
+----Using WHERE clause
+	select id, name from employee99 where id = 1;
+
+----WHERE, (+,-,*,/) Arithmetic Operator
+	select * from emp where deptno = 10;
+
+	select empsalary+1000 from emp where empid = 10;
+
+----WHERE, (AND, OR, NOT) logical Operators
+	select empsalary from emp WHERE id = 10 OR name = 'abc';	
+
+----WHERE, (IN, BETWEEN, NOT IN) Other Logical Operator
+	select empsalary from emp WHERE id IN(101, 102, 104);	
+	select empsalary from emp WHERE id BETWEEN 101 AND 104);	
+	select empsalary from emp WHERE id NOT IN(101, 102, 104);
+
+----Fetch Records from multiple tables
+	SELECT age, new FROM demo1, demo2;
+
+----using ALIAS
+		select empname "First_Name", empsalary "Salary" from emp WHERE id = 10;
+
+		SELECT d1.Id, d2.NAME FROM demo1 d1, demo2 d2 where d1.id = d2.id;
+========================================================================================================================

@@ -1,0 +1,47 @@
+ Aliases:
+
+SQL aliases are used to give a table, or a column in a table, a temporary name.
+
+Aliases are often used to make column names more readable.
+
+An alias only exists for the duration of that query.
+
+An alias is created with the AS keyword.
+
+========================================================
+
+Column Alias:
+
+----Simple select 
+	 select id as demoid, name as demoname from demo1;
+	select id "demoid", name "demoname" from demo1;
+
+
+----With Where clause
+	select id AS demoID, NAme AS DemoName from demo1 where age IS NOT NULL;
+
+
+TABLE Alias:
+
+----To fetch records from two tables.	
+
+
+	----Without Where clause
+	this is used when both tables have same column name.	
+	**** when both tables have same column
+	 SELECT d1.Id, d2.NAME FROM demo1 d1, demo2 d2;
+	(Say, demo1 has 4 and demo2 5 records result will be 20 records(4*5) i.e each record of demo1*each record of demo2).
+
+	**** when both tables have different column names(no need of alias)
+	SELECT age, new FROM demo1, demo2;
+
+NOTE: There should not be ambiguity in column names
+	if same name column occurs, we use alis
+
+	----With Where clause
+
+         SELECT C.ID, C.NAME, O.NAME FROM demo1 C, demo2 O WHERE  C.ID = O.ID;
+
+	
+
+

@@ -1,0 +1,67 @@
+
+Data types : are used to represent the nature of the data that can be stored in the database table.
+
+Data types mainly classified into three categories for every database.
+
+I] String Data types
+II] Numeric Data types
+III] Date and time Data types
+
+Oracle Data Types
+
+**Oracle String data types
+
+CHAR(size):- It is used to store character data within the predefined length. It can be stored up to 2000 bytes.
+NCHAR(size):-  used to store national character data within the predefined length. can be stored up to 2000 bytes.
+VARCHAR(SIZE)
+VARCHAR2(size):- used to store variable string data within the predefined length. can be stored up to 4000 byte.
+NVARCHAR2(size):-  store Unicode string data within the predefined length. We have to must specify the size of NVARCHAR2 data type. can be stored up to 4000 bytes.
+
+
+**Oracle Numeric Data Types
+
+NUMBER(p, s)
+FLOAT(p)
+BINARY_FLOAT
+BINARY_DOUBLE
+
+
+**Oracle Date and Time Data Types
+
+DATE:- It is used to store a valid date-time format with a fixed length. Its range varies from January 1, 4712 BC to 	December 31, 9999 AD.
+TIMESTAMP:- It is used to store the valid date in YYYY-MM-DD with time hh:mm:ss format.
+
+**Oracle Large Object Data Types (LOB Types)
+
+BLOB:- used to specify unstructured binary data. Its range goes up to 232-1 bytes or 4 GB.
+BFILE:- store binary data in an external file. Its range goes up to 232-1 bytes or 4 GB.
+CLOB:- 
+NCLOB:-
+RAW(size):-
+LONG RAW:-
+
+Difference between char, varchar and VARCHAR2 in Oracle:
+
+1	Char stands for “Character”	     			VarChar/VarChar2 stands for Variable Character
+
+2	It is used to store character string of fixed length	It is used to store character string of variable length
+
+3	It has a Maximum Size of 2000 Bytes 			It has a Maximum Size of 4000 Bytes  
+
+4	Char will pad the spaces to the right side to fill 	VarChar will not pad the spaces to the right side to 		
+	the length specified during the Declaration		fill the length specified during Declaration. 
+
+5	It is not required to specify the size at the time	It is  required to specify the size at the time of 		
+	of declaration. It will take 1 Byte as default	 	declaration.						
+
+6	It is Static Datatype(i.e Fixed Length)			It is Dynamic Datatype(i.e Variable Length)
+
+7	It can lead to memory wastage 				It manages Memory efficiently
+
+8	It is 50% much faster than VarChar/VarChar2 		It is relatively slower as compared to Char
+
+
+Note : There is no difference between VarChar and VarChar2 in Oracle. However, it is advised not to use VarChar for storing data as it is reserved for future use for storing some other type of variable. Hence, always use VarChar2 in place of VarChar.
+
+Hence it is advised to use Char datatype when the length of the character string is fixed and will not change in the future.
+If the length of the character string is not fixed, then VarChar2 is preferred. 

@@ -1,0 +1,33 @@
+create table set1
+(
+	id number(10),
+	name varchar2(30),
+	education varchar2(10),
+	salary float(10)		
+);
+
+create table set2
+(
+	id number(10),
+	name varchar2(30),
+	education varchar2(10),
+	salary float(10)		
+);
+
+insert into set1 values(1, 'aaa', 'bbbb', 100000);
+insert into set1 values(2, 'bbb', 'cccc', 200000);
+insert into set1 values(3, 'ccc', 'dddd', 300000);
+insert into set1 values(3, 'ccc', 'dddd', 300000);
+insert into set1 values(4, 'ddd', 'eeee', 400000);
+insert into set1 values(4, 'eee', 'ffff', 500000);
+insert into set1 values(5, 'ggg', 'hhhh', 600000);
+insert into set1 values(5, 'ggg', 'hhhh', 600000);
+
+insert into set2 values(5, 'ggg', 'hhhh', 600000);
+insert into set2 values(11, 'ssas', 'mkmkm', 980000);
+insert into set2 values(22, 'qwb', 'dsdc', 700000);
+insert into set2 values(33, 'qkjj', 'njnn', 200000);
+insert into set2 values(44, 'abb', 'bncc', 62000);
+insert into set2 values(55, 'uub', 'cqqq', 215000);
+insert into set2 values(66, 'uub', 'cqqq', 215000);
+

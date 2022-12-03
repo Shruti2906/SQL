@@ -1,0 +1,304 @@
+SQL Constraints:
+
+	-Constraints are the rules/restrictions 	 enforced on data columns on a table
+	-This ensures the accuracy and reliability of 		 the data in the database.
+-----------------------------------------------------------
+Following are some of the most commonly used constraints available in SQL :
+
+NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK, DEFUALT
+------------------------------------------------------------
+
+NOT NULL : 
+
+	By default, a column can hold NULL values. If 	you do not want a column to have a NULL value, 	then you need to define such a constraint on 	this column specifying that NULL is now not 	allowed for that column.
+
+	-A NULL is not the same as no data, rather, it represents unknown data.
+
+----while creating table:
+
+create table Demo2
+(
+	id number(5) constraint nkk NOT NULL,
+	name varchar2(10)
+);
+
+ insert into demo1 values('8',null);
+
+---- after table is created
+
+ alter table demo1 modify age NOT NULL;
+ alter table demo2 modify id constraint nkkc not null;
+
+
+---- Remove not null constraint
+	ALTER table demo1 MODIFY age number null;
+
+---- drop constraint by name
+	alter table demo2 drop constraint nkk;
+
+----disable constraint
+	alter table demo2 disable constraint nkkc;
+
+----enable constraint
+	alter table demo2 enable constraint nk2;
+
+NOTE: Same constraint name cannot be used even if the 	constraint is diabled
+
+--------------------------------------------------------
+DEFUALT:
+	The DEFAULT constraint provides a default value 	to a column when the INSERT INTO statement does 	not provide a specific value.
+
+---- while creating table
+
+create table Demo3
+(
+	id number(5) DEFAULT 0,
+	name varchar2(10)
+);
+
+----alter table
+	 alter table demo3 MODIFY name  varchar2 (20) DEFAULT 5000.00;
+
+
+----Modify default constraint
+	 alter table demo3 modify id number(5) default 3;
+
+-----Remove constarint
+	alter table demo3 modify id default null;
+
+NOTE: If default constraint is not applied on the 		column and we use 'default' in insert 			statement, 'null' will be inserted. 
+	
+	e.g  insert into demo4 values(default, default);		     if deaulf constarint is not 				     appliend on any of the column 'null' 	 	     will be inserted into it.
+
+
+--------------------------------------------------------
+
+UNIQUE:
+	The UNIQUE constraint ensures that all values in a column are different.
+
+	Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+
+	A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+
+Diff between UNIQUE and PK is :
+	you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+
+----CREATE TABLE
+create table Demo5
+(
+	id number(5) constraint UK_demo5_id UNIQUE,
+	name varchar2(10)
+);
+
+----ALTER table
+
+	 alter table demo5 modify name constraint UK_demo5_name unique;
+
+
+----RENAME Constraint
+	alter table demo5 rename constraint UK_demo5_name to UKKK;
+
+----DROP constraint
+	 alter table demo5 drop constraint UKKK;
+
+----ENABLE/DISABLE constarint
+	alter table demo5 enable constraint UK_demo5_id;
+	alter table demo5 disable constraint UK_demo5_id;
+
+
+NOTE: You CAN insert NULL values into columns with the 	UNIQUE constraint because NULL is the absence of 	a value, so it is never equal to other NULL 	values and not considered a duplicate value.
+
+space(' ') is valid only once.
+---------------------------------------------------------
+CHECK:
+
+----CREATE table
+create table Demo6
+(
+	id number(5) constraint CH_demo6_id CHECK(id>0),
+	name varchar2(10) 
+
+);
+
+----single constraint on multiple columns
+
+create table Demo7
+(
+	id number(5),
+	name varchar2(10) ,
+	constraint CH_demo6_id_NAME CHECK(id>0 AND name = 'a')
+);
+
+
+create table Demo8
+(
+	id number(5),
+	name varchar2(10),
+	id2 number(5),
+	constraint chkk	 CHECK(id<id2)
+);
+
+----ALTER, Modify
+	 alter table demo6 modify id number(5) constraint ch CHECK(id>0);
+
+	 alter table demo6 modify id number(5) constraint chj CHECK(id<0 AND id>-30);
+
+----ALTER , Add
+	alter table demo6 add constraint chk CHECK(id<10 AND name = 'a');
+
+
+
+NOTE: There could be more than ONE check constraints on 		single column.
+
+	Adding constraint (single constraint name) on multiple column is possible.
+
+----DROP table
+	alter table demo6 drop constraint chj;
+
+----Disable/Enable
+	 alter table demo6 disable constraint ch_demo6_id;
+
+--------------------------------------------------------
+
+PRIMARY KEY:
+
+	The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+	Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+	A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+----CREATE
+
+create table Demo9
+(
+	id number(5) constraint PK_demo9_id PRIMARY KEY,
+	name varchar2(10) 
+);
+
+create table Demo10
+(
+	id number(5),
+	name varchar2(10) ,
+	constraint PK_demo10_id PRIMARY KEY(id, name)
+);
+
+----ALTER add/modify
+	alter table demo6 add constraint pk_demo6 PRIMARY KEY(id);
+
+	alter table demo6 modify id number(5) constraint pk_demo6 PRIMARY KEY;
+
+----DROP 
+	alter table demo6 drop constraint pk_demo66;
+
+	ALTER TABLE demo6 DROP PRIMARY KEY;
+
+----Disable/Enable/Modify
+	alter table demo6 disable constraint ch_demo6_id;
+	
+--------------------------------------------------------
+FOREIGN KEY:
+
+create table Demo11
+(
+	id number(5),
+	name varchar2(10) ,
+	constraint PK_demo11_id PRIMARY KEY(id)
+);
+
+create table Demo12
+(
+	id number(5),
+	name varchar2(10) ,
+	demo11id int references demo11(id),
+	constraint PK_demo12_id PRIMARY KEY(id)
+);
+
+CREATE TABLE demo12
+(
+	ID int NOT NULL PRIMARY KEY,
+   	no int NOT NULL,
+	demo11ID int,
+	constraint fk_demo12 foreign key(demo11id) 		references demo11(id)
+);
+-------Named foreign key
+
+create table demo13
+(
+id int,
+name varchar2(3),
+primary key (id),
+demo11id int,
+constraint fkk foreign key (demo11id) references demo11(id)
+); 
+
+
+---ALter / add
+	 alter table bb add constraint fk_bb_name foreign key(name) references aa(name);
+
+	 alter table demom add constraint FK_demomN_id FOREIGN KEY(id) references demo1(id) ON DELETE SET NULL;
+
+----ALter disable/enable/drop
+	alter table bb disable constraint fk_bb_name;
+	alter table bb enable constraint fk_bb_name;
+	alter table bb drop constraint fk_bb_name;
+
+
+on delete cascade
+
+
+NOTE:   
+	-Foreign key can be null
+	-parent key must be unique(in parent table)
+	-parent key could be null(in parent table)
+
+
+----PRIMRY KEY and FOREIGN KEY on Multiple column
+
+create table a1
+(
+	id number(5),
+	name varchar2(10) ,
+	PRIMARY KEY(id,name)
+);
+
+
+create table b1
+(
+	id number(5),
+	name varchar2(10) ,
+	constraint fk_bb_composite FOREIGN KEY(id,name) references a1(id, name)
+);
+
+----foreign key constraint ON DELETE CASCADE 
+
+	if a record in the parent table is deleted, then the corresponding records in the child table will automatically be deleted.
+
+create table a1
+(
+	id number(5),
+	name varchar2(10) ,
+	PRIMARY KEY(id,name)
+);
+
+
+create table b1
+(
+	id number(5),
+	name varchar2(10) ,
+	constraint fk_bb_composite FOREIGN KEY(id,name) 	references a1(id, name) ON DELETE CASCADE
+);
+
+
+------------------------------------------------------------
+
+---Enable NOVALIDATE Constraint:
+	ENABLE NOVALIDATE means the constraint is checked for new or modified rows, but existing data may violate the constraint
+
+ alter table demom enable NOVALIDATE constraint CK_demom_id;
+
+ ALTER TABLE tab1 MODIFY CONSTRAINT fk_tab1_tab2 ENABLE VALIDATE;
+
+ alter table demom add constraint FK_demomN_id FOREIGN KEY(id) references demo1(id) ON DELETE SET NULL;
+
+------------------------------------------------------------
