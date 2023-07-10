@@ -302,3 +302,18 @@ create table b1
  alter table demom add constraint FK_demomN_id FOREIGN KEY(id) references demo1(id) ON DELETE SET NULL;
 
 ------------------------------------------------------------
+
+** Constraint Naming Convention  :
+	-Name can/should be given to constraint while applying it.
+	- it makes it easier to refer to the constraint after defining it.
+
+	eg.
+	create table b1
+	(
+		id number(5),
+		name varchar2(10) ,
+		constraint fk_bb_composite FOREIGN KEY(id,name) references a1(id, name) ON DELETE CASCADE
+	);
+
+	- name should be given to constraint like : ConstraintType_TableName_CoulmnName;
+
