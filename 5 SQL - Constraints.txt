@@ -198,6 +198,8 @@ create table Demo10
 	
 --------------------------------------------------------
 FOREIGN KEY:
+	FK refers to PK of other table.
+	Each relation can have any number of FK.
 
 create table Demo11
 (
