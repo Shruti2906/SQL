@@ -200,6 +200,7 @@ create table Demo10
 FOREIGN KEY:
 	FK refers to PK of other table.
 	Each relation can have any number of FK.
+	An attribute can be PK and FK both in a table.
 
 create table Demo11
 (
