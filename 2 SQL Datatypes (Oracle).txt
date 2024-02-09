@@ -24,7 +24,11 @@ NUMBER(p, s)
 FLOAT(p)
 BINARY_FLOAT
 BINARY_DOUBLE
-
+-----
+In MYSQL We have Decimal Data type: eg. column1 DECIMAL(4, 0)
+ it can store up to 4 digits with no decimal places.
+ allows you to store fixed-point numbers, and the precision represents the total number of digits that can be stored (including both digits before and after the decimal point), 
+column1 DECIMAL(4, 2) :  it can store up to 4 digits with 2 decimal places.
 
 **Oracle Date and Time Data Types
 
